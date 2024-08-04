@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms', # Them
     'crispy_tailwind', # Them
-    'products',
+    'index',
     'users',
+    'products',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +61,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR,'template')
+            os.path.join(BASE_DIR,'template'),
+            os.path.join(BASE_DIR, 'templates') # Proof
         ], # Paths
         'APP_DIRS': True,
         'OPTIONS': {
@@ -123,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

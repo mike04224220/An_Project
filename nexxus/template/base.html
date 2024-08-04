@@ -7,14 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script> <!--CSS Framework-->
 </head>
 <body>
-    <p>
-        Hola,
-        {% if user.is_authenticated %}
-            {{ user.username }}
-        {% else %}    
-            <a href="{% url "login" %}">Login</a>
-        {% endif %}
-    </p>
     <div class="container mx-auto px-4">
         {% block content %}{% endblock content %}
     </div>

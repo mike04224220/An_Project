@@ -5,8 +5,6 @@ from .forms import ProductForm # form
 from django.urls import reverse_lazy # success_url
 from .models import Product
 
-
-
 class ProductFormView(generic.FormView):
     template_name = "add_product.html" # Name Html
     form_class = ProductForm # form
