@@ -12,6 +12,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True, verbose_name='Disponible')  # Disponibilidad del producto
     units = models.IntegerField(null=True, blank=True, verbose_name='Unidades')  # Unidades disponibles del producto
     photo = models.ImageField(upload_to='logos', null=True, blank=True, verbose_name='Foto')  # Foto del producto
+    date = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de Creación')
 
     def __str__(self):
         return self.name  # Representación en cadena del producto (nombre)
