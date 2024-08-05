@@ -61,8 +61,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR,'template'),
-            os.path.join(BASE_DIR, 'templates') # Proof
+            os.path.join(BASE_DIR,'template')
         ], # Paths
         'APP_DIRS': True,
         'OPTIONS': {
@@ -112,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-co'
 
 TIME_ZONE = 'UTC'
 
@@ -136,4 +135,6 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
 CRISPY_TEMPLATE_PACK = "tailwind"
 
-LOGIN_REDIRECT_URL = "list_product" # After log
+LOGIN_REDIRECT_URL = "home" # After login
+
+LOGOUT_REDIRECT_URL = "home" # After logout ??

@@ -13,7 +13,6 @@ class ProductForm (forms.Form):
     )  # 10 numbres / 2 decimals
     available = forms.BooleanField(initial=True, required=False, label='Disponible')
     units = forms.IntegerField(required=False, label='Unidades')
-    photo = forms.ImageField(required=False, label='Foto')
 
         # Method Validation
     def clean(self):
@@ -40,5 +39,4 @@ class ProductForm (forms.Form):
             priceSell=self.cleaned_data['priceSell'],
             available=self.cleaned_data['available'],
             units=self.cleaned_data['units'],
-            photo=self.cleaned_data['photo'],
         )

@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +10,19 @@
     <title>Index</title>
 </head>
 <body>
-    <h1>{{ title }}</h1>
+    <h1 class="text-3xl font-bold underline">
+        Bienvenido a Nexxus   
+        {% if user.is_authenticated %}
+        <span class="nav-link">{{ user.username }}</span>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-link">AnonimusUser</a>
+        {% endif %}
+    </h1> 
+    <br>
     <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam natus fuga culpa placeat, cupiditate dicta doloremque quo, aliquid fugiat molestias saepe nulla velit? Nesciunt fugiat consequatur dignissimos, aspernatur rem hic excepturi sint eaque qui eos odio quo inventore veniam veritatis ratione. Fugit perferendis incidunt temporibus aperiam dolorum officia eius.    
     </p>
 </body>
 </html>
+
+{% endblock content %}

@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Products</title>
-</head>
+{% extends "base.html" %}
+{% block content %}
+    {% load static %}
+<link rel="stylesheet" href="{% static 'styles/add_product.css' %}"> <!--CSS-->
 <body>
     <!-- Url ==> Name reference -->
-    <form action="{% url "add_product" %}" method="post"> <!--Content inside Server-->
+    <h1 class="text-3xl font-bold underline"    >Crea un Producto</h1>
+    <form action="{% url 'add_product' %}" method="post" class="form-container"> <!--Content inside Server-->
         {% csrf_token %} <!--Security-->
-        {{form.as_p}} <!--Bring Form-->
-        <button type="submit">Agregar</button>
+        {{ form.as_p }} <!--Bring Form-->
+        <button type="submit" class="btn-submit">Agregar</button>
     </form>
 </body>
 </html>
+
+{% endblock content %}
