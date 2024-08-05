@@ -1,3 +1,4 @@
 Django==5.0.7
 pillow==10.4.0 # Image Validations
 django-crispy-forms==2.3
+crispy-tailwind==1.0.3

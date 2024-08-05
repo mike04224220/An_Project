@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'index',
     'users',
     'products',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -136,5 +137,6 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
 
 LOGIN_REDIRECT_URL = "home" # After login
-
 LOGOUT_REDIRECT_URL = "home" # After logout ??
+
+LOGIN_URL = 'login' # Order => Redirect login
