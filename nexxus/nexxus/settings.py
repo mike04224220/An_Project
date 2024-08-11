@@ -12,10 +12,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
+import environ # Lets
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+env = environ.Env() # Environ
+environ.Env.read_env(os.path.join(BASE_DIR, '.env')) # Link route
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms', # Them
     'crispy_tailwind', # Them
+    'rest_framework', # Framework
     'index',
     'users',
     'products',
@@ -83,10 +86,7 @@ WSGI_APPLICATION = 'nexxus.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': env.db('DJANGO_DB_URL') 
 }
 
 
@@ -140,3 +140,12 @@ LOGIN_REDIRECT_URL = "home" # After login
 LOGOUT_REDIRECT_URL = "home" # After logout ??
 
 LOGIN_URL = 'login' # Order => Redirect login
+
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
+    ]
+}

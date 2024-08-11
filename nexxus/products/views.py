@@ -5,6 +5,11 @@ from .forms import ProductForm # form
 from django.urls import reverse_lazy # success_url
 from .models import Product
 
+from rest_framework.views import APIView # Framework
+from .serializers import ProductSerializer
+from rest_framework.response import Response 
+
+
 class ProductFormView(generic.FormView):
     template_name = "add_product.html" # Name Html
     form_class = ProductForm # form
@@ -19,3 +24,14 @@ class ProductListView(generic.ListView):
     model = Product
     template_name = 'list_product.html'
     context_object_name = 'products'
+
+
+class ProductListAPI(APIView):
+    authentication_classes = [] # Remove authentication
+    permission_classes = [] # Remove permissions
+
+    def get(self, request): # Json => Al products
+        products = Product.objects.all()
+        # Many=True=> List
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data) # Json Data
