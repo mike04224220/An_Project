@@ -2,3 +2,7 @@ Django==5.0.7
 pillow==10.4.0 # Image Validations
 django-crispy-forms==2.3
 crispy-tailwind==1.0.3
+djangorestframework==3.15.2
+psycopg==3.2.1 # Postgresql ?
+psycopg2-binary==2.9.9 # Postgresql
+django-environ==0.11.2 # Lets
