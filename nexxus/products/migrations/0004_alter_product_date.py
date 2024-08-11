@@ -7,14 +7,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0003_product_date'),
+        ("products", "0003_product_date"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='product',
-            name='date',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now, verbose_name='Fecha de Creación'),
+            model_name="product",
+            name="date",
+            field=models.DateTimeField(
+                auto_now_add=True,
+                default=django.utils.timezone.now,
+                verbose_name="Fecha de Creación",
+            ),
             preserve_default=False,
         ),
     ]

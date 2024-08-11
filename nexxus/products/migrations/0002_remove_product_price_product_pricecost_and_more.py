@@ -6,29 +6,33 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0001_initial'),
+        ("products", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='product',
-            name='price',
+            model_name="product",
+            name="price",
         ),
         migrations.AddField(
-            model_name='product',
-            name='priceCost',
-            field=models.DecimalField(decimal_places=2, default=0, max_digits=10, verbose_name='Precio Costo'),
+            model_name="product",
+            name="priceCost",
+            field=models.DecimalField(
+                decimal_places=2, default=0, max_digits=10, verbose_name="Precio Costo"
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='product',
-            name='priceSell',
-            field=models.DecimalField(decimal_places=2, default=0, max_digits=10, verbose_name='Precio Venta'),
+            model_name="product",
+            name="priceSell",
+            field=models.DecimalField(
+                decimal_places=2, default=0, max_digits=10, verbose_name="Precio Venta"
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='product',
-            name='units',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Unidades'),
+            model_name="product",
+            name="units",
+            field=models.IntegerField(blank=True, null=True, verbose_name="Unidades"),
         ),
     ]
