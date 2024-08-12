@@ -19,8 +19,8 @@ Follow these steps to get the project up and running on your local machine.
 Clone the project repository from GitHub to your local machine.
 
 ```bash
-git clone https://github.com/mike04224220/E-commerce.git nexxus
-cd nexxus
+git clone https://github.com/mike04224220/E-commerce.git
+cd E-commerce
 ```
 
 ### 2\. Set Up Virtual Environment
@@ -28,17 +28,13 @@ cd nexxus
 Create and activate a virtual environment.
 
 
-```bash
-Option 1:
-    pip install virtualenv
-    virtualenv my_virtual_env
-Option 2:
-    python3.12.4 -m venv my_virtual_env
+```Terminal
+python -m venv .venv
 
 Activate:
-    CDM: source venv/bin/activate 
-    PowerShell: .\my_virtaul_env\Scripts\Activate
-    Bash: source .my_virtaul_env/Scripts/activate
+    CDM: source .venv/bin/activate 
+    PowerShell: .\env\Scripts\Activate
+    Bash: source .venv/Scripts/activate
     Linux: source bin/activate
 ```
 
@@ -47,15 +43,18 @@ Activate:
 Install the required Python packages using `pip`.
 
 `pip install -r requirements.txt`
+`pip install -r requirements-dev.txt`
 
 ### 4\. Configure Environment Variables
 
-Create a `.env` file in the root of the project. You can use `.env.example` as a template.
+Move to the route and create a `.env` file in the root of the project. You can use `.env` as a template.
 
+`cd nexxxus`
 
 `cp .env.example .env`
 
 Update the `.env` file with your database credentials and other necessary configurations.
+`postgres://USER:PASSWORD@HOST:PORT/NAMEDB`
 
 ### 5\. Set Up the Database
 
