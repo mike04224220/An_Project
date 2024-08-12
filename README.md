@@ -49,9 +49,9 @@ Install the required Python packages using `pip`.
 
 Move to the route and create a `.env` file in the root of the project. You can use `.env` as a template.
 
-`cd nexxxus`
+`cd nexxus/`
 
-`cp .env.example .env`
+`touch .env`/`cp .env`
 
 Update the `.env` file with your database credentials and other necessary configurations.
 `postgres://USER:PASSWORD@HOST:PORT/NAMEDB`
