@@ -8,6 +8,7 @@ Requirements
 
 *   **PostgreSQL** (Make sure it's installed and running)
 *   **Python 3.12.4**
+*   Visaul Extensions = Django, Python, , Python Debugger, Pylance, Black Formater
 
 Installation Guide
 ------------------
