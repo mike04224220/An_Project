@@ -19,16 +19,123 @@
     <!-- Artículos en la Orden -->
     <div class="mt-6">
         <h3 class="text-xl font-bold mb-2">Artículos en tu orden:</h3>
-        {% for product_order in order.orderproduct_set.all %}
-            <div class="flex justify-between items-center py-2 border-b">
-                <!-- Nombre del Producto -->
-                <div class="text-lg">{{ product_order.product.name }}</div>
-                <!-- Precio del Producto -->
-                <div class="text-lg font-semibold">{{ product_order.product.priceSell|floatformat:2 }}</div>
+        <div id="order-items">
+            {% for product_order in order.orderproduct_set.all %}
+                <div class="flex justify-between items-center py-2 border-b product-row" data-product-id="{{ product_order.product.id }}">
+                    <div class="text-lg">{{ product_order.product.name }}</div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-lg font-semibold product-price" data-price="{{ product_order.product.priceSell }}">
+                            ${{ product_order.product.priceSell|floatformat:2 }}
+                        </div>
+                        <!-- Botón para eliminar producto -->
+                        <button type="button" class="remove-item bg-red-500 text-white px-2 py-1 rounded-md">Eliminar</button>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="text-red-500">No hay artículos en tu orden</div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Mostrar Total -->
+    <div class="mt-6 text-right">
+        <h3 class="text-xl font-bold">Total a Pagar: $<span id="total-price">0.00</span></h3>
+    </div>
+
+    <!-- Formulario para datos del cliente -->
+    <div class="mt-6" id="form-section">
+        <h3 class="text-xl font-bold mb-4">Completa los datos para confirmar el envío:</h3>
+
+        <!-- Formulario -->
+        <form id="order-form">
+            {% csrf_token %}
+            
+            <!-- Nombre -->
+            <div class="mb-4">
+                <label for="name" class="block text-lg font-semibold">Nombre Completo:</label>
+                <input type="text" id="name" name="name" class="w-full p-2 border border-gray-300 rounded-md" required>
             </div>
-        {% empty %}
-            <div class="text-red-500">No hay artículos en tu orden</div>
-        {% endfor %}
+
+            <!-- Cédula -->
+            <div class="mb-4">
+                <label for="cedula" class="block text-lg font-semibold">Cédula:</label>
+                <input type="text" id="cedula" name="cedula" class="w-full p-2 border border-gray-300 rounded-md" required>
+            </div>
+
+            <!-- Dirección -->
+            <div class="mb-4">
+                <label for="direccion" class="block text-lg font-semibold">Dirección de Envío:</label>
+                <input type="text" id="direccion" name="direccion" class="w-full p-2 border border-gray-300 rounded-md" required>
+            </div>
+
+            <!-- Método de Pago -->
+            <div class="mb-4">
+                <label for="metodo_pago" class="block text-lg font-semibold">Método de Pago:</label>
+                <select id="metodo_pago" name="metodo_pago" class="w-full p-2 border border-gray-300 rounded-md" required>
+                    <option value="">Seleccione un método de pago</option>
+                    <option value="tarjeta_credito">Tarjeta de Crédito</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="efectivo">Efectivo en la entrega</option>
+                </select>
+            </div>
+
+            <!-- Botón de Confirmar Envío -->
+            <button type="button" id="confirm-order-btn" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">
+                Confirmar Envío
+            </button>
+        </form>
+    </div>
+
+    <!-- Mensaje de confirmación de compra oculto inicialmente -->
+    <div id="confirmation-message" class="mt-6 p-4 bg-green-100 text-green-700 rounded-md hidden">
+        <h3 class="text-xl font-bold">¡Gracias por tu compra, <span id="customer-name"></span>!</h3>
+        <p>Su pedido ha sido enviado. Total pagado: $<span id="total-paid"></span>. Vuelve pronto.</p>
     </div>
 </div>
+
+<script>
+    // Calcular el total de los productos en el carrito
+    function calculateTotal() {
+        var total = 0;
+        var priceElements = document.querySelectorAll('#order-items .product-price');
+        
+        priceElements.forEach(function (priceElement) {
+            var price = parseFloat(priceElement.getAttribute('data-price'));
+            total += price;
+        });
+
+        document.getElementById('total-price').textContent = total.toFixed(2);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        calculateTotal();
+
+        // Evento para eliminar un producto
+        document.querySelectorAll('.remove-item').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var productRow = this.closest('.product-row');  // Obtener la fila del producto
+                productRow.remove();  // Eliminar el producto de la vista
+                calculateTotal();  // Recalcular el total
+            });
+        });
+
+        document.getElementById('confirm-order-btn').addEventListener('click', function() {
+            // Validar el formulario
+            var name = document.getElementById('name').value;
+            var cedula = document.getElementById('cedula').value;
+            var direccion = document.getElementById('direccion').value;
+            var metodoPago = document.getElementById('metodo_pago').value;
+
+            if (name && cedula && direccion && metodoPago) {
+                // Mostrar mensaje de confirmación y total pagado
+                document.getElementById('form-section').style.display = 'none';
+                document.getElementById('confirmation-message').classList.remove('hidden');
+                document.getElementById('customer-name').textContent = name;
+                document.getElementById('total-paid').textContent = document.getElementById('total-price').textContent;
+            } else {
+                alert('Por favor complete todos los campos antes de enviar.');
+            }
+        });
+    });
+</script>
 {% endblock content %}
