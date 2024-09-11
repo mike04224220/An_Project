@@ -1,53 +1,196 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexxus</title>
+    <!-- Carga de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    {% load static %} <!--Add static files-->
-</head>
-<body>
-    <header>
-        <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-            <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                <a href="{% url "home" %}" class="flex items-center">
-                    <img src="{% static 'logo.png' %}" alt="Descripciónn" class="size-10">
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Nexxus</span>
-                </a>
-                <div class="flex items-center lg:order-2">
-                    <a href="{% url 'list_product' %}" class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
-                        Catálogo</a>
+    {% load static %}
+    <style>
+        /* Fuente personalizada */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9; /* Fondo suave */
+        }
 
-                    <a 
-                        href="{% url "my_order" %}" 
-                        class="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800">
-                        Mi Pedido</a>
-                        
+        /* Estilo y animación para "Nexxus" */
+        .nexxus-dynamic {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #6366f1; /* Color principal */
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.5), 0 0 20px rgba(99, 102, 241, 0.7);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .nexxus-dynamic:hover {
+            color: #4ade80; /* Cambio de color a verde brillante */
+            text-shadow: 0 0 15px rgba(74, 222, 128, 0.5), 0 0 30px rgba(74, 222, 128, 0.7);
+            transform: scale(1.1); /* Efecto de agrandamiento en hover */
+        }
+
+        /* Animación de carga */
+        #loader {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #6366f1;
+            width: 60px;
+            height: 60px;
+            animation: spin 1.5s linear infinite;
+            z-index: 9999;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Botón flotante de contacto */
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #6366f1;
+            color: white;
+            border-radius: 50%;
+            padding: 15px;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .floating-btn:hover {
+            background-color: #4ade80;
+        }
+
+        /* Menú móvil */
+        #mobile-menu {
+            display: none;
+        }
+
+        .open #mobile-menu {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Loader animado (desaparece después de la carga) -->
+    <div id="loader"></div>
+
+    <header>
+        <nav class="bg-white border-b border-gray-200 px-4 lg:px-6 py-4 shadow-md">
+            <div class="container mx-auto flex flex-wrap justify-between items-center">
+                <!-- Logo con animación dinámica en la palabra "Nexxus" -->
+                <a href="{% url 'home' %}" class="flex items-center">
+                    <img src="{% static 'logo.png' %}" alt="Logo de Nexxus" class="mr-3 h-10">
+                    <span class="nexxus-dynamic">Nexxus</span>
+                </a>
+                <!-- Menú para pantallas grandes -->
+                <div class="hidden lg:flex items-center space-x-4">
+                    <a href="{% url 'list_product' %}" class="text-gray-800 font-medium bg-gradient-to-r from-green-400 to-blue-500 text-white px-5 py-2.5 rounded-lg hover:from-green-500 hover:to-blue-600 focus:ring-4 focus:ring-blue-300 transition-all">
+                        Catálogo
+                    </a>
+                    <a href="{% url 'my_order' %}" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 font-medium px-5 py-2.5 rounded-lg shadow-lg transition-all">
+                        Mi Pedido
+                    </a>
                     {% if user.is_authenticated %}
-                    <!--Greeting-->
-                    <span class="text-gray-800 dark:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none dark:focus:ring-gray-800">Hola {{ user.username }}</span>
-                    <!--Form => Logout-->
-                    <form action="{% url "logout" %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
-                            Cerrar sesión
-                        </button>
-                    </form>
-                    <!--Login-->
+                        <span class="text-gray-800">Hola {{ user.username }}</span>
+                        <form action="{% url 'logout' %}" method="post" class="inline">
+                            {% csrf_token %}
+                            <button type="submit" class="text-gray-800 hover:bg-indigo-600 hover:text-white focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 transition-all">
+                                Cerrar sesión
+                            </button>
+                        </form>
                     {% else %}
-                        <a href="{% url "login" %}" class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
-                            Login
+                        <a href="{% url 'login' %}" class="text-gray-800 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium px-5 py-2.5 rounded-lg transition-all">
+                            Iniciar sesión
+                        </a>
+                    {% endif %}
+                </div>
+
+                <!-- Menú hamburguesa para pantallas móviles -->
+                <button id="hamburger" class="lg:hidden block focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+
+                <!-- Menú móvil -->
+                <div id="mobile-menu" class="lg:hidden hidden flex flex-col space-y-2 mt-4">
+                    <a href="{% url 'list_product' %}" class="text-gray-800 font-medium bg-gradient-to-r from-green-400 to-blue-500 text-white px-5 py-2.5 rounded-lg hover:from-green-500 hover:to-blue-600 focus:ring-4 focus:ring-blue-300 transition-all">
+                        Catálogo
+                    </a>
+                    <a href="{% url 'my_order' %}" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 font-medium px-5 py-2.5 rounded-lg shadow-lg transition-all">
+                        Mi Pedido
+                    </a>
+                    {% if user.is_authenticated %}
+                        <span class="text-gray-800">Hola {{ user.username }}</span>
+                        <form action="{% url 'logout' %}" method="post" class="inline">
+                            {% csrf_token %}
+                            <button type="submit" class="text-gray-800 hover:bg-indigo-600 hover:text-white focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 transition-all">
+                                Cerrar sesión
+                            </button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="text-gray-800 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium px-5 py-2.5 rounded-lg transition-all">
+                            Iniciar sesión
                         </a>
                     {% endif %}
                 </div>
             </div>
         </nav>
     </header>
-    <br>
-    <div class="container mx-auto px-4">
+
+    <!-- Contenido principal -->
+    <main class="container mx-auto px-4 py-6">
         {% block content %}{% endblock content %}
-    </div>
-    
+    </main>
+
+    <!-- Footer simple para terminar la página -->
+    <footer class="bg-white border-t border-gray-200 mt-10">
+        <div class="container mx-auto px-4 py-6 text-center text-gray-500">
+            © 2024 Nexxus. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!-- Botón flotante de contacto -->
+    <a href="#" id="whatsapp-btn" class="floating-btn">
+        💬
+    </a>
+
+    <!-- Script para el menú hamburguesa, el loader y la redirección a WhatsApp -->
+    <script>
+        // Menú hamburguesa
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Ocultar el loader después de cargar la página
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.display = 'none';
+        });
+
+        // Redirección a WhatsApp Web o App
+        const whatsappBtn = document.getElementById('whatsapp-btn');
+        const phoneNumber = '573203866880'; // Número de WhatsApp
+
+        whatsappBtn.addEventListener('click', () => {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const url = isMobile 
+                ? `https://api.whatsapp.com/send?phone=${phoneNumber}`
+                : `https://web.whatsapp.com/send?phone=${phoneNumber}`;
+
+            window.open(url, '_blank');
+        });
+    </script>
 </body>
 </html>

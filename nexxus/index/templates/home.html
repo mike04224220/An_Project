@@ -7,21 +7,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>Inicio - Nexxus Tech</title>
 </head>
-<body>
-    <h1 class="text-3xl font-bold underline">
-        Bienvenido a Nexxus   
-        {% if user.is_authenticated %}
-        <span class="nav-link">{{ user.username }}</span>
-        {% else %}
-            <a href="{% url 'login' %}" class="nav-link">AnonimusUser</a>
-        {% endif %}
-    </h1> 
-    <br>
-    <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam natus fuga culpa placeat, cupiditate dicta doloremque quo, aliquid fugiat molestias saepe nulla velit? Nesciunt fugiat consequatur dignissimos, aspernatur rem hic excepturi sint eaque qui eos odio quo inventore veniam veritatis ratione. Fugit perferendis incidunt temporibus aperiam dolorum officia eius.    
-    </p>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <!-- Hero Section with Images and Button -->
+    <section class="bg-cover bg-center h-screen text-white relative overflow-hidden">
+        <div class="container mx-auto h-full flex flex-col justify-center items-center text-center relative">
+            <!-- Carousel Section -->
+            <div id="carousel" class="w-full max-w-4xl mx-auto overflow-hidden relative mb-8">
+                <div class="flex transition-transform duration-700 ease-in-out transform" id="carousel-images">
+                    <!-- Images with proper alignment -->
+                    <img src="https://images.macrumors.com/t/WlC4OQ92hcskoFr2tw1RFtuOi9o=/1600x0/article-new/2023/09/iPhone-16-Side-Feature.jpg" alt="iPhone 16 Image 1" class="w-full h-96 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-500">
+                    <img src="https://images.macrumors.com/t/vKCWQYBv5sZhRIPH9FimGV6s0YI=/1600x0/article-new/2023/09/iPhone-16-Side-2-Feature.jpg" alt="iPhone 16 Image 2" class="w-full h-96 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-500">
+                    <img src="https://images.macrumors.com/t/ENUxq3xBCYWdt2w4W6_Q6h3z-wQ=/2500x/article-new/2023/01/Apple-MacBook-Pro-M2-Feature-Blue-Green.jpg" alt="MacBook Pro M2" class="w-full h-96 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-500">
+                    <img src="https://co.nothing.tech/cdn/shop/files/phone-2a-plus-desktop_1472x.jpg?v=1722309024" alt="Nothing Phone 2" class="w-full h-96 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-500">
+                    <img src="https://www.tuexpertomovil.com/wp-content/uploads/2024/07/cuando-sale-el-galaxy-a56.jpg.webp" alt="Samsung Galaxy A56" class="w-full h-96 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-500">
+                    <img src="https://appleman.pk/cdn/shop/products/Airpods-3rd-Generation-4.jpg?v=1667318664&width=2048" alt="Airpods 3rd Gen" class="w-full h-96 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-500">
+                    <img src="https://ca-times.brightspotcdn.com/dims4/default/a5a408c/2147483647/strip/true/crop/7926x5284+0+0/resize/1200x800!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fd5%2F46%2F91ccedd8c7d41925e16541a65c88%2F1b96f889940949bab7f80c6ccbe810b4" alt="Apple Product Launch" class="w-full h-96 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-500">
+                </div>
+                <!-- Navigation Buttons -->
+                <button class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-blue-600 transition duration-300" onclick="prevImage()">
+                    &#10094;
+                </button>
+                <button class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-blue-600 transition duration-300" onclick="nextImage()">
+                    &#10095;
+                </button>
+            </div>
+
+            <!-- Button Section -->
+            <div class="relative mt-4">
+                <a href="#about" class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white px-8 py-4 rounded-full hover:bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 transition-all duration-500 inline-block shadow-md hover:shadow-lg">
+                    Descubre más
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-6 text-gray-800 animate-fade-in">¿Quiénes somos?</h2>
+            <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto animate-slide-up">
+                En Nexxus TechVision, nos enorgullece ofrecerte las tecnologías más avanzadas del mercado, combinando calidad superior con precios competitivos. Nuestra misión es proporcionarte soluciones innovadoras que se adapten a tus necesidades, facilitando la gestión de tus operaciones con herramientas eficientes y de última generación.
+            </p>
+        </div>
+    </section>
+
+    <!-- Más Vendidos Section -->
+    <section id="best-sellers" class="bg-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-6 text-gray-800">Productos Más Vendidos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Producto más vendido -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative transform hover:-translate-y-2 hover:scale-105 transition-all duration-500">
+                    <img src="https://consumer.huawei.com/content/dam/huawei-cbg-site/latam/mx/mkt/plp/new-phones/mate-series/mate-series-card-1.jpg" alt="Huawei Mate" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Huawei Mate Series</h3>
+                    <p class="text-blue-600">$999</p>
+                </div>
+                <!-- Producto más vendido -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative transform hover:-translate-y-2 hover:scale-105 transition-all duration-500">
+                    <img src="https://consumer.huawei.com/content/dam/huawei-cbg-site/latam/co/mkt/plp/new-tablets/kv/matepad-11-5-s-kv.jpg" alt="Huawei MatePad" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Huawei MatePad 11.5"</h3>
+                    <p class="text-blue-600">$499</p>
+                </div>
+                <!-- Producto más vendido -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative transform hover:-translate-y-2 hover:scale-105 transition-all duration-500">
+                    <img src="https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RW16TLP?ver=5c8b&q=90&m=6&h=705&w=1253&b=%23FFFFFFFF&f=jpg&o=f&p=140&aim=true" alt="Microsoft Surface" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Microsoft Surface Pro</h3>
+                    <p class="text-blue-600">$1299</p>
+                </div>
+                <!-- Producto más vendido -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative transform hover:-translate-y-2 hover:scale-105 transition-all duration-500">
+                    <img src="https://m.media-amazon.com/images/I/71OyrTkxpGL.jpg" alt="Dell XPS 13" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Dell XPS 13</h3>
+                    <p class="text-blue-600">$999</p>
+                </div>
+                <!-- Producto más vendido -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative transform hover:-translate-y-2 hover:scale-105 transition-all duration-500">
+                    <img src="https://i.pcmag.com/imagery/roundups/01hiB08j7yaJGJmPl2YhRRH-59..v1713199550.jpg" alt="Apple MacBook Pro" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Apple MacBook Pro M1</h3>
+                    <p class="text-blue-600">$1999</p>
+                </div>
+                <!-- Producto más vendido -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative transform hover:-translate-y-2 hover:scale-105 transition-all duration-500">
+                    <img src="https://carrefourbr.vtexassets.com/arquivos/ids/161951218/4b3948ead6834bbdbc9c812680e5c956.jpg?v=638545212855400000" alt="Asus Gaming Laptop" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Asus Gaming Laptop</h3>
+                    <p class="text-blue-600">$1499</p>
+                </div>
+                <!-- Producto más vendido -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative transform hover:-translate-y-2 hover:scale-105 transition-all duration-500">
+                    <img src="https://p2-ofp.static.pub//fes/cms/2023/09/22/420mhyhz36va0vkgicrbh18eqpyxme699012.png" alt="PlayStation 5" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">PlayStation 5</h3>
+                    <p class="text-blue-600">$499</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos con Descuento Section -->
+    <section id="discount-products" class="bg-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-6 text-gray-800">Productos con Descuento</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Producto con descuento -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative transform hover:-translate-y-2 hover:scale-105 transition-all duration-500">
+                    <img src="https://p2-ofp.static.pub//fes/cms/2023/09/22/420mhyhz36va0vkgicrbh18eqpyxme699012.png" alt="PlayStation 5" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">PlayStation 5</h3>
+                    <p class="text-red-600 line-through">$499</p>
+                    <p class="text-green-600">$399</p>
+                </div>
+                <!-- Producto con descuento -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative transform hover:-translate-y-2 hover:scale-105 transition-all duration-500">
+                    <img src="https://consumer.huawei.com/content/dam/huawei-cbg-site/common/mkt/plp/tablet-new/matepad-pro-series-card-1.jpg" alt="Huawei MatePad Pro" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Huawei MatePad Pro</h3>
+                    <p class="text-red-600 line-through">$699</p>
+                    <p class="text-green-600">$549</p>
+                </div>
+                <!-- Producto con descuento -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative transform hover:-translate-y-2 hover:scale-105 transition-all duration-500">
+                    <img src="https://consumer.huawei.com/content/dam/huawei-cbg-site/common/mkt/pdp/wearables/watch-4-pro-space-edition/images/kv/huawei-watch-4-pro-space-edition-key-vision.jpg" alt="Huawei Watch 4 Pro" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Huawei Watch 4 Pro</h3>
+                    <p class="text-red-600 line-through">$399</p>
+                    <p class="text-green-600">$299</p>
+                </div>
+                <!-- Producto con descuento -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative transform hover:-translate-y-2 hover:scale-105 transition-all duration-500">
+                    <img src="https://m.media-amazon.com/images/I/81ZKNYBwYlL.jpg" alt="Samsung Galaxy Buds" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Samsung Galaxy Buds</h3>
+                    <p class="text-red-600 line-through">$149</p>
+                    <p class="text-green-600">$99</p>
+                </div>
+                <!-- Producto con descuento -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative transform hover:-translate-y-2 hover:scale-105 transition-all duration-500">
+                    <img src="https://www.apple.com/newsroom/images/product/watch/standard/Apple_watch-series7_lp_09142021.jpg.og.jpg?202408230027" alt="Apple Watch Series 7" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Apple Watch Series 7</h3>
+                    <p class="text-red-600 line-through">$499</p>
+                    <p class="text-green-600">$449</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">&copy; 2024 Nexxus TechVision. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Carousel Script -->
+    <script>
+        let currentIndex = 0;
+
+        function showImage(index) {
+            const carouselImages = document.getElementById('carousel-images');
+            const totalImages = carouselImages.children.length;
+            const width = carouselImages.children[0].clientWidth;
+            
+            if (index >= totalImages) {
+                currentIndex = 0;
+            } else if (index < 0) {
+                currentIndex = totalImages - 1;
+            } else {
+                currentIndex = index;
+            }
+            
+            carouselImages.style.transform = `translateX(-${currentIndex * width}px)`;
+        }
+
+        function nextImage() {
+            showImage(currentIndex + 1);
+        }
+
+        function prevImage() {
+            showImage(currentIndex - 1);
+        }
+
+        // Auto-play
+        setInterval(() => {
+            nextImage();
+        }, 5000);
+    </script>
+
+    <!-- Tailwind Animations -->
+    <style>
+        .animate-fade-in {
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+        .animate-slide-up {
+            animation: slideUp 1.5s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+
 </body>
 </html>
 
