@@ -1,4 +1,4 @@
-E-commerce:
+E-commerce: An_Project
 ===========
 
 Welcome to the my world, Neexxus Project! This Django application is designed to manage different kinds of products, orders, and users efficiently.
