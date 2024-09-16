@@ -21,7 +21,7 @@ Clone the project repository from GitHub to your local machine.
 
 ```bash
 git clone https://github.com/mike04224220/An_Project.git
-cd E-commerce
+cd An_Project
 ```
 
 ### 2\. Set Up Virtual Environment
