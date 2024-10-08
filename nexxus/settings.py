@@ -12,23 +12,28 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
-import environ  # Lets
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-env = environ.Env()  # Environ
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))  # Link route
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+# Inicializar environ
+env = environ.Env()
+
+# Intentar cargar el archivo .env y verificar si existe
+env_path = os.path.join(BASE_DIR, ".env")
+if os.path.exists(env_path):
+    environ.Env.read_env(env_path)  # Cargar el archivo .env
+else:
+    print(f"ADVERTENCIA: No se encontró el archivo .env en la ruta esperada: {env_path}")
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-0ls4qkas#b(ijgx*j1q897#r+lw1v+4hd0dgf%w6#ew2ve0vqm"
+SECRET_KEY = env('SECRET_KEY', default="django-insecure-0ls4qkas#b(ijgx*j1q897#r+lw1v+4hd0dgf%w6#ew2ve0vqm")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DEBUG", default=True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*"])  # Permite todas las conexiones, útil para desarrollo
 
 
 # Application definition
@@ -40,9 +45,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "crispy_forms",  # Them
-    "crispy_tailwind",  # Them
-    "rest_framework",  # Framework
+    "crispy_forms",
+    "crispy_tailwind",
+    "rest_framework",
     "index",
     "users",
     "products",
@@ -61,10 +66,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "nexxus.urls"
 
+# Ajustar el TEMPLATES para encontrar correctamente las plantillas personalizadas
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "template")],  # Paths
+        "DIRS": [
+            BASE_DIR / "template"  # Mantener la referencia a "template"
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -79,16 +87,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "nexxus.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-DATABASES = {"default": env.db("DJANGO_DB_URL")}
-
+# Database configuration
+DATABASES = {
+    "default": env.db("DJANGO_DB_URL", default="sqlite:///db.sqlite3")
+}
 
 # Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -104,10 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
 LANGUAGE_CODE = "es-co"
 
 TIME_ZONE = "UTC"
@@ -116,31 +117,27 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-STATIC_URL = "static/"
+# Static files configuration (CSS, JavaScript, Images)
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+# Configuración para los archivos estáticos en producción
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
+# Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Configuración para crispy-forms con Tailwind CSS
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
-
 CRISPY_TEMPLATE_PACK = "tailwind"
 
-LOGIN_REDIRECT_URL = "home"  # After login
-LOGOUT_REDIRECT_URL = "home"  # After logout ??
+# Login & Logout URLs
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"
+LOGIN_URL = "login"
 
-LOGIN_URL = "login"  # Order => Redirect login
-
-
+# DRF configuration
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
     ]
