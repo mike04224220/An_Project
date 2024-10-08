@@ -1,4 +1,4 @@
-E-commerce:
+E-commerce: An_Project
 ===========
 
 Welcome to the my world, Neexxus Project! This Django application is designed to manage different kinds of products, orders, and users efficiently.
@@ -20,8 +20,8 @@ Follow these steps to get the project up and running on your local machine.
 Clone the project repository from GitHub to your local machine.
 
 ```bash
-git clone https://github.com/mike04224220/E-commerce.git
-cd E-commerce
+git clone https://github.com/mike04224220/An_Project.git
+cd An_Project
 ```
 
 ### 2\. Set Up Virtual Environment
